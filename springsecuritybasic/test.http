@@ -1,0 +1,12 @@
+GET http://localhost:8081/welcome
+Accept: application/json
+
+### test welcome endpoint
+
+GET http://localhost:8081/welcome
+Authorization: Basic user udemy
+
+### test welcome endpoint with security
+
+
+
