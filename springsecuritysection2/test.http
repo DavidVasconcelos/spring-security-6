@@ -1,0 +1,10 @@
+GET http://localhost:8082/myAccount
+Accept: application/json
+Authorization: Basic user udemy
+
+### test myAccount with basic authorization
+
+
+
+
+
