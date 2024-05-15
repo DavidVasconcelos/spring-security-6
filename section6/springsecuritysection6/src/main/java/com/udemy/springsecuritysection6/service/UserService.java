@@ -2,7 +2,9 @@ package com.udemy.springsecuritysection6.service;
 
 import com.udemy.springsecuritysection6.model.Customer;
 
-public interface EazyBankUserDetailsService {
+public interface UserService {
 
-  Customer save(Customer customer);
+  void save(Customer customer);
+
+  Customer findByEmail(String email);
 }

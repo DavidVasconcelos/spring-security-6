@@ -1,11 +1,32 @@
 package com.udemy.springsecuritysection6.model;
 
-import jakarta.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Objects;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "customer")
 public class Customer implements Serializable {
@@ -15,77 +36,46 @@ public class Customer implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", nullable = false)
-  private Long id;
-  @Column(name = "email", nullable = false)
+  @Column(name = "customer_id", nullable = false)
+  private Integer id;
+
+  @Column(name = "name")
+  private String name;
+
+  @Column(name = "email")
   private String email;
-  @Column(name = "pwd", nullable = false)
+
+  @Column(name = "mobile_number")
+  private String mobileNumber;
+
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+  @Column(name = "pwd")
   private String pwd;
-  @Column(name = "role", nullable = false)
+
+  @Column(name = "role")
   private String role;
 
-  public Customer() {
-  }
-
-  public Customer(final Long id, final String email, final String pwd, final String role) {
-    this.id = id;
-    this.email = email;
-    this.pwd = pwd;
-    this.role = role;
-  }
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-  public String getPwd() {
-    return pwd;
-  }
-
-  public void setPwd(String pwd) {
-    this.pwd = pwd;
-  }
-
-  public String getRole() {
-    return role;
-  }
-
-  public void setRole(String role) {
-    this.role = role;
-  }
+  @JsonSerialize(using = LocalDateSerializer.class)
+  @Column(name = "create_dt")
+  private LocalDate createDt;
 
   @Override
   public boolean equals(final Object o) {
-      if (this == o) {
-          return true;
-      }
-      if (o == null || getClass() != o.getClass()) {
-          return false;
-      }
-    final Customer customer = (Customer) o;
-    return Objects.equals(id, customer.id) && Objects.equals(email, customer.email)
-        && Objects.equals(pwd, customer.pwd) && Objects.equals(role, customer.role);
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof final Customer customer)) {
+      return false;
+    }
+    return Objects.equals(id, customer.id) && Objects.equals(name, customer.name)
+        && Objects.equals(email, customer.email) && Objects.equals(mobileNumber,
+        customer.mobileNumber) && Objects.equals(pwd, customer.pwd)
+        && Objects.equals(role, customer.role) && Objects.equals(createDt,
+        customer.createDt);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, email, pwd, role);
-  }
-
-  @Override
-  public String toString() {
-    return STR."Customer{id=\{id}, email='\{email}\{'\''}, pwd='******\{'\''}, role='\{role}\{'\''}\{'}'}";
+    return Objects.hash(id, name, email, mobileNumber, pwd, role, createDt);
   }
 }

@@ -2,12 +2,12 @@ server:
   port: 8083
 spring:
   application:
-    name: springsecuritysection3
+    name: springsecuritysection6
   security:
     user:
       password: udemy
   datasource:
-    url: jdbc:mysql://fedora/localdb
+    url: jdbc:mysql://fedora/eazybank
     username: root
     password: admin01
   jpa:
