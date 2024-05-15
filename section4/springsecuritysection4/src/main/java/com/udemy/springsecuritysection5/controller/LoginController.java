@@ -1,7 +1,7 @@
-package com.udemy.springsecuritysection5.controller;
+package com.udemy.springsecuritysection6.controller;
 
-import com.udemy.springsecuritysection5.model.Customer;
-import com.udemy.springsecuritysection5.service.EazyBankUserDetailsService;
+import com.udemy.springsecuritysection6.model.Customer;
+import com.udemy.springsecuritysection6.service.EazyBankUserDetailsService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

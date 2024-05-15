@@ -1,6 +1,6 @@
-package com.udemy.springsecuritysection5.repository;
+package com.udemy.springsecuritysection6.repository;
 
-import com.udemy.springsecuritysection5.model.Customer;
+import com.udemy.springsecuritysection6.model.Customer;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
