@@ -1,4 +1,4 @@
-package com.udemy.springsecuritysection6.config;
+package com.udemy.springsecuritysection6.security;
 
 import com.udemy.springsecuritysection6.exception.InvalidPasswordException;
 import com.udemy.springsecuritysection6.model.Customer;

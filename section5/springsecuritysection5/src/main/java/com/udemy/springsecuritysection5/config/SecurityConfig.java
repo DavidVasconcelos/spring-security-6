@@ -1,4 +1,4 @@
-package com.udemy.springsecuritysection6.config;
+package com.udemy.springsecuritysection6.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
