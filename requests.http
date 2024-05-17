@@ -1,0 +1,16 @@
+### GET request with a header
+GET http://localhost:8083/notices
+Accept: application/json
+
+
+### Send POST request with json body
+POST http://localhost:8083/register
+Content-Type: application/json
+
+{
+  "name": "Eazy Bytes 2",
+  "email": "tutor@eazybytes.com",
+  "mobileNumber": "1236546278",
+  "pwd": "12345",
+  "role": "user"
+}
