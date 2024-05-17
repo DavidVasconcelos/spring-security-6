@@ -1,9 +1,11 @@
 package com.udemy.springsecuritysection7.security;
 
 import com.udemy.springsecuritysection7.exception.InvalidPasswordException;
+import com.udemy.springsecuritysection7.model.Authority;
 import com.udemy.springsecuritysection7.model.Customer;
 import com.udemy.springsecuritysection7.repository.CustomerRepository;
 import java.util.List;
+import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -11,6 +13,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -60,7 +63,12 @@ public class UsernamePwdAuthenticationProvider implements AuthenticationProvider
     final List<Customer> customers = customerRepository.findByEmail(username);
     final Customer user = customers.stream().findFirst().orElseThrow(() ->
         new UsernameNotFoundException(STR."User details not found for the user : \{username}"));
-    return new User(user.getEmail(), user.getPwd(),
-        List.of(new SimpleGrantedAuthority(user.getRole())));
+    return new User(user.getEmail(), user.getPwd(), getGrantedAuthorities(user.getAuthorities()));
+  }
+
+  private List<GrantedAuthority> getGrantedAuthorities(final Set<Authority> authorities) {
+    return authorities.stream()
+        .map(authority -> (GrantedAuthority) new SimpleGrantedAuthority(authority.getName()))
+        .toList();
   }
 }

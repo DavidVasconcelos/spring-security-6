@@ -1,6 +1,7 @@
 package com.udemy.springsecuritysection7.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
@@ -9,17 +10,24 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Getter
 @Setter
@@ -58,6 +66,11 @@ public class Customer implements Serializable {
   @JsonSerialize(using = LocalDateSerializer.class)
   @Column(name = "create_dt")
   private LocalDate createDt;
+
+  @JsonIgnore
+  @OneToMany(mappedBy = "customer")
+  @Fetch(FetchMode.JOIN)
+  private Set<Authority> authorities = new HashSet<>();
 
   @Override
   public boolean equals(final Object o) {
