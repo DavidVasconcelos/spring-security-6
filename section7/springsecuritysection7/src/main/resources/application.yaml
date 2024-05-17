@@ -1,0 +1,17 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: springsecuritysection6
+  security:
+    user:
+      password: udemy
+  datasource:
+    url: jdbc:mysql://fedora/eazybank
+    username: root
+    password: admin01
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true

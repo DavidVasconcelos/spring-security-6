@@ -1,6 +1,6 @@
-package com.udemy.springsecuritysection6.service;
+package com.udemy.springsecuritysection7.service;
 
-import com.udemy.springsecuritysection6.model.Customer;
+import com.udemy.springsecuritysection7.model.Customer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface EazyBankUserDetailsService extends UserDetailsService {

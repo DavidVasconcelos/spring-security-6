@@ -1,4 +1,4 @@
-package com.udemy.springsecuritysection6.security;
+package com.udemy.springsecuritysection7.security;
 
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
