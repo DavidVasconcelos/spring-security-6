@@ -1,4 +1,4 @@
-package com.udemy.springsecuritysection7;
+package com.udemy.springsecuritysection8;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

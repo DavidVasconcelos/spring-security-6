@@ -1,4 +1,4 @@
-package com.udemy.springsecuritysection7;
+package com.udemy.springsecuritysection8;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
