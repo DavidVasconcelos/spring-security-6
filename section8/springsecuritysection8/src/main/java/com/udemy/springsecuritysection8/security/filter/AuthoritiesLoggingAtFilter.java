@@ -1,0 +1,24 @@
+package com.udemy.springsecuritysection8.security.filter;
+
+import jakarta.servlet.Filter;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import java.io.IOException;
+import java.util.logging.Logger;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
+public class AuthoritiesLoggingAtFilter implements Filter {
+
+  final Logger LOG = Logger.getLogger(this.getClass().getName());
+
+  @Override
+  public void doFilter(final ServletRequest request, final ServletResponse response,
+      final FilterChain chain)
+      throws IOException, ServletException {
+    LOG.info("Authentication Validation is in progress");
+    chain.doFilter(request, response);
+  }
+}

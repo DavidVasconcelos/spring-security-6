@@ -1,4 +1,4 @@
-package com.udemy.springsecuritysection8.security;
+package com.udemy.springsecuritysection8.security.provider;
 
 import com.udemy.springsecuritysection8.exception.InvalidPasswordException;
 import com.udemy.springsecuritysection8.model.Authority;

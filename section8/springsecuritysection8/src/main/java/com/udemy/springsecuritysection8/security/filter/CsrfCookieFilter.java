@@ -1,4 +1,4 @@
-package com.udemy.springsecuritysection8.security;
+package com.udemy.springsecuritysection8.security.filter;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -8,7 +8,7 @@ import java.io.IOException;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-public class CsrfCookieFilter extends OncePerRequestFilter {
+public class CsrfCookieFilter extends OncePerRequestFilter { //use OncePerRequestFilter preferably
 
   @Override
   protected void doFilterInternal(final HttpServletRequest request,

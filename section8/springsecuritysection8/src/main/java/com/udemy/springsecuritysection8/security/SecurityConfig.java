@@ -2,6 +2,10 @@ package com.udemy.springsecuritysection8.security;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
+import com.udemy.springsecuritysection8.security.filter.AuthoritiesLoggingAfterFilter;
+import com.udemy.springsecuritysection8.security.filter.AuthoritiesLoggingAtFilter;
+import com.udemy.springsecuritysection8.security.filter.CsrfCookieFilter;
+import com.udemy.springsecuritysection8.security.filter.RequestValidationBeforeFilter;
 import java.util.Collections;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,12 +45,11 @@ public class SecurityConfig {
             .csrfTokenRequestHandler(requestHandler)
             .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
         )
+        .addFilterBefore(new RequestValidationBeforeFilter(), BasicAuthenticationFilter.class)
+        .addFilterAt(new AuthoritiesLoggingAtFilter(), BasicAuthenticationFilter.class)
         .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
+        .addFilterAfter(new AuthoritiesLoggingAfterFilter(), BasicAuthenticationFilter.class)
         .authorizeHttpRequests((requests) -> requests
-//            .requestMatchers("/myAccount").hasAuthority("VIEWACCOUNT")
-//            .requestMatchers("/myBalance").hasAnyAuthority("VIEWACCOUNT", "VIEWBALANCE")
-//            .requestMatchers("/myLoans").hasAuthority("VIEWLOANS")
-//            .requestMatchers("/myCards").hasAuthority("VIEWCARDS")
             .requestMatchers("/myAccount").hasRole("USER")
             .requestMatchers("/myBalance").hasAnyRole("USER","ADMIN")
             .requestMatchers("/myLoans").hasRole("USER")
