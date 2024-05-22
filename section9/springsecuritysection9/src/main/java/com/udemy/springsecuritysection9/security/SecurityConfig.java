@@ -6,6 +6,7 @@ import com.udemy.springsecuritysection9.security.filter.AuthoritiesLoggingAfterF
 import com.udemy.springsecuritysection9.security.filter.AuthoritiesLoggingAtFilter;
 import com.udemy.springsecuritysection9.security.filter.CsrfCookieFilter;
 import com.udemy.springsecuritysection9.security.filter.JWTTokenGeneratorFilter;
+import com.udemy.springsecuritysection9.security.filter.JWTValidatorFilter;
 import com.udemy.springsecuritysection9.security.filter.RequestValidationBeforeFilter;
 import java.util.Collections;
 import org.springframework.context.annotation.Bean;
@@ -45,6 +46,7 @@ public class SecurityConfig {
             .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
         )
         .addFilterBefore(new RequestValidationBeforeFilter(), BasicAuthenticationFilter.class)
+        .addFilterBefore(new JWTValidatorFilter(), BasicAuthenticationFilter.class)
         .addFilterAt(new AuthoritiesLoggingAtFilter(), BasicAuthenticationFilter.class)
         .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
         .addFilterAfter(new AuthoritiesLoggingAfterFilter(), BasicAuthenticationFilter.class)
