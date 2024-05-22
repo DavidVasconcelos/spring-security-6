@@ -34,10 +34,8 @@ public class SecurityConfig {
     final CsrfTokenRequestAttributeHandler requestHandler = new CsrfTokenRequestAttributeHandler();
     requestHandler.setCsrfRequestAttributeName("_csrf");
     http
-        .securityContext((securityContext) -> securityContext.requireExplicitSave(false)
-        )
         .sessionManagement((sessionManagement) -> sessionManagement
-            .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         )
         .cors(Customizer.withDefaults())
         .csrf((csrf) -> csrf
@@ -84,6 +82,7 @@ public class SecurityConfig {
     config.setAllowedMethods(Collections.singletonList("*"));
     config.setAllowCredentials(true);
     config.setAllowedHeaders(Collections.singletonList("*"));
+    config.setExposedHeaders(Collections.singletonList("Authorization"));
     config.setMaxAge(3600L);
     source.registerCorsConfiguration("/**", config);
     return new CorsFilter(source);
