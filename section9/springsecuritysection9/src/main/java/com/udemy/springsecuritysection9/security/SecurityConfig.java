@@ -5,6 +5,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 import com.udemy.springsecuritysection9.security.filter.AuthoritiesLoggingAfterFilter;
 import com.udemy.springsecuritysection9.security.filter.AuthoritiesLoggingAtFilter;
 import com.udemy.springsecuritysection9.security.filter.CsrfCookieFilter;
+import com.udemy.springsecuritysection9.security.filter.JWTTokenGeneratorFilter;
 import com.udemy.springsecuritysection9.security.filter.RequestValidationBeforeFilter;
 import java.util.Collections;
 import org.springframework.context.annotation.Bean;
@@ -47,6 +48,7 @@ public class SecurityConfig {
         .addFilterAt(new AuthoritiesLoggingAtFilter(), BasicAuthenticationFilter.class)
         .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
         .addFilterAfter(new AuthoritiesLoggingAfterFilter(), BasicAuthenticationFilter.class)
+        .addFilterAt(new JWTTokenGeneratorFilter(), BasicAuthenticationFilter.class)
         .authorizeHttpRequests((requests) -> requests
             .requestMatchers("/myAccount").hasRole("USER")
             .requestMatchers("/myBalance").hasAnyRole("USER","ADMIN")
