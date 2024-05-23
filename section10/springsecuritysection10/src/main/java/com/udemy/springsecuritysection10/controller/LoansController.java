@@ -3,6 +3,7 @@ package com.udemy.springsecuritysection10.controller;
 import com.udemy.springsecuritysection10.model.Loans;
 import com.udemy.springsecuritysection10.service.LoansService;
 import java.util.List;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ public class LoansController {
   }
 
   @GetMapping("/myLoans")
+  @PostAuthorize("hasRole('USER')")
   public List<Loans> getLoanDetails(@RequestParam Integer id) {
     return loanService.findByCustomerIdOrderByStartDtDesc(id);
   }
