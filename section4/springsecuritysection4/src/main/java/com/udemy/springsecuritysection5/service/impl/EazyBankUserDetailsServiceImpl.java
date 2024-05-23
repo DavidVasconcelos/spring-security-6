@@ -1,8 +1,8 @@
-package com.udemy.springsecuritysection9.service.impl;
+package com.udemy.springsecuritysection10.service.impl;
 
-import com.udemy.springsecuritysection9.model.Customer;
-import com.udemy.springsecuritysection9.repository.CustomerRepository;
-import com.udemy.springsecuritysection9.service.EazyBankUserDetailsService;
+import com.udemy.springsecuritysection10.model.Customer;
+import com.udemy.springsecuritysection10.repository.CustomerRepository;
+import com.udemy.springsecuritysection10.service.EazyBankUserDetailsService;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;

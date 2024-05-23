@@ -1,4 +1,4 @@
-package com.udemy.springsecuritysection9.model;
+package com.udemy.springsecuritysection10.model;
 
 import jakarta.persistence.*;
 
