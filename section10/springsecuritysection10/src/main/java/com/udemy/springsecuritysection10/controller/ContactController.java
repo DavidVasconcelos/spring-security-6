@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Random;
 import org.apache.coyote.BadRequestException;
+import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.access.prepost.PreFilter;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +23,7 @@ public class ContactController {
 
   @PostMapping("/contact")
   @PreFilter("filterObject.contactName != 'Test'")
+  @PostFilter("filterObject.subject != 'Test'")
   public List<Contact> saveContactInquiryDetails(@RequestBody List<Contact> contacts) // need to be a list to filter work properly
       throws BadRequestException {
     final Contact contact = contacts.stream().findFirst()
