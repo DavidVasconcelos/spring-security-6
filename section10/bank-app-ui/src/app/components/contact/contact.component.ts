@@ -11,6 +11,7 @@ import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent implements OnInit {
+  contacts = new Array();
   model = new Contact();
 
   constructor(private dashboardService: DashboardService) {
@@ -24,7 +25,10 @@ export class ContactComponent implements OnInit {
   saveMessage(contactForm: NgForm) {
     this.dashboardService.saveMessage(this.model).subscribe(
       responseData => {
-        this.model = <any> responseData.body;
+        this.contacts = <any> responseData.body;
+        this.contacts.forEach(function (this: ContactComponent, contact: Contact) {
+            this.model = contact;
+        }.bind(this));
         contactForm.resetForm();
       });
 
