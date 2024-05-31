@@ -2,7 +2,7 @@ server:
   port: 8083
 spring:
   application:
-    name: springsecuritysection6
+    name: springsecuritysection9
   security:
     user:
       password: udemy
