@@ -86,3 +86,5 @@ build/
 */target
 /build
 */build
+
+http-client.private.env.json

@@ -24,9 +24,36 @@ POST http://fedora:8180/realms/eazybankdev/protocol/openid-connect/token
 Content-Type: application/x-www-form-urlencoded
 
 client_id = eazybankapi &
-client_secret = Q1LRmDcfOemeT5QikaHTymC8N4S9Zy3H &
+client_secret = {{secret}} &
 scope = openid email profile address &
 grant_type = client_credentials
+> {%
+    client.global.set("token", response.body.access_token)
+%}
+
+### GET My Cards
+< {%
+    request.variables.set("token",  client.global.get("token"))
+%}
+GET http://localhost:8083/myCards?email=happy@example.com
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### GET My Account
+< {%
+    request.variables.set("token",  client.global.get("token"))
+%}
+GET http://localhost:8083/myAccount?email=happy@example.com
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### GET My Loans
+< {%
+    request.variables.set("token",  client.global.get("token"))
+%}
+GET http://localhost:8083/myLoans?email=happy@example.com
+Accept: application/json
+Authorization: Bearer {{token}}
 
 
 
