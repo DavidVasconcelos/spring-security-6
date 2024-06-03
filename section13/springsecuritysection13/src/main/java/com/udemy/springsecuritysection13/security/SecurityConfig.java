@@ -2,12 +2,7 @@ package com.udemy.springsecuritysection13.security;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
-import com.udemy.springsecuritysection13.security.filter.AuthoritiesLoggingAfterFilter;
-import com.udemy.springsecuritysection13.security.filter.AuthoritiesLoggingAtFilter;
 import com.udemy.springsecuritysection13.security.filter.CsrfCookieFilter;
-import com.udemy.springsecuritysection13.security.filter.JWTTokenGeneratorFilter;
-import com.udemy.springsecuritysection13.security.filter.JWTValidatorFilter;
-import com.udemy.springsecuritysection13.security.filter.RequestValidationBeforeFilter;
 import java.util.Collections;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,8 +11,6 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
@@ -45,15 +38,10 @@ public class SecurityConfig {
             .csrfTokenRequestHandler(requestHandler)
             .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
         )
-        .addFilterBefore(new RequestValidationBeforeFilter(), BasicAuthenticationFilter.class)
-        .addFilterBefore(new JWTValidatorFilter(), BasicAuthenticationFilter.class)
-        .addFilterAt(new AuthoritiesLoggingAtFilter(), BasicAuthenticationFilter.class)
         .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
-        .addFilterAfter(new AuthoritiesLoggingAfterFilter(), BasicAuthenticationFilter.class)
-        .addFilterAfter(new JWTTokenGeneratorFilter(), BasicAuthenticationFilter.class)
         .authorizeHttpRequests((requests) -> requests
             .requestMatchers("/myAccount").hasRole("USER")
-            .requestMatchers("/myBalance").hasAnyRole("USER","ADMIN")
+            .requestMatchers("/myBalance").hasAnyRole("USER", "ADMIN")
             .requestMatchers("/myLoans").authenticated()
             .requestMatchers("/myCards").hasRole("USER")
             .requestMatchers("user").authenticated()
@@ -71,11 +59,6 @@ public class SecurityConfig {
         .formLogin(withDefaults())
         .httpBasic(withDefaults());
     return http.build();
-  }
-
-  @Bean
-  public PasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder();
   }
 
   @Bean
