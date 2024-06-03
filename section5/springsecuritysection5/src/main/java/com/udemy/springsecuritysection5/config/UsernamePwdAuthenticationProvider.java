@@ -1,9 +1,9 @@
-package com.udemy.springsecuritysection10.security;
+package com.udemy.springsecuritysection13.security;
 
-import com.udemy.springsecuritysection10.exception.InvalidPasswordException;
-import com.udemy.springsecuritysection10.model.Customer;
-import com.udemy.springsecuritysection10.repository.CustomerRepository;
-import com.udemy.springsecuritysection10.service.EazyBankUserDetailsService;
+import com.udemy.springsecuritysection13.exception.InvalidPasswordException;
+import com.udemy.springsecuritysection13.model.Customer;
+import com.udemy.springsecuritysection13.repository.CustomerRepository;
+import com.udemy.springsecuritysection13.service.EazyBankUserDetailsService;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

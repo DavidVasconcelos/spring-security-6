@@ -1,4 +1,4 @@
-package com.udemy.springsecuritysection10.security;
+package com.udemy.springsecuritysection13.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
