@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface LoansService {
 
-  List<Loans> findByCustomerIdOrderByStartDtDesc(Integer id);
+  List<Loans> findByCustomerEmailOrderByStartDtDesc(String email);
 
 }

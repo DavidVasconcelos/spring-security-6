@@ -4,8 +4,10 @@ spring:
   application:
     name: springsecuritysection13
   security:
-    user:
-      password: udemy
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://fedora:8180/realms/eazybankdev/protocol/openid-connect/certs
   datasource:
     url: jdbc:mysql://fedora/eazybank
     username: root

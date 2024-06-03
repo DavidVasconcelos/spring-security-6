@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface BalanceService {
 
-  List<AccountTransactions> findByCustomerIdOrderByTransactionDtDesc(Integer id);
+  List<AccountTransactions> findByCustomerEmailOrderByTransactionDtDesc(String email);
 
 }

@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface CardsService {
 
-  List<Cards> findByCustomerId(Integer id);
+  List<Cards> findByCustomerEmail(String email);
 
 }

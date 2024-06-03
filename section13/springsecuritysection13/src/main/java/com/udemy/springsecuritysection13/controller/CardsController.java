@@ -17,7 +17,7 @@ public class CardsController {
   }
 
   @GetMapping("/myCards")
-  public List<Cards> getCardDetails(@RequestParam Integer id) {
-    return cardsService.findByCustomerId(id);
+  public List<Cards> getCardDetails(@RequestParam String email) {
+    return cardsService.findByCustomerEmail(email);
   }
 }

@@ -2,6 +2,7 @@ package com.udemy.springsecuritysection13.security;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
+import com.udemy.springsecuritysection13.security.converter.KeycloakConverter;
 import com.udemy.springsecuritysection13.security.filter.CsrfCookieFilter;
 import java.util.Collections;
 import org.springframework.context.annotation.Bean;
@@ -11,6 +12,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
@@ -28,6 +30,8 @@ public class SecurityConfig {
   SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
     final CsrfTokenRequestAttributeHandler requestHandler = new CsrfTokenRequestAttributeHandler();
     requestHandler.setCsrfRequestAttributeName("_csrf");
+    final JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
+    jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(new KeycloakConverter());
     http
         .sessionManagement((sessionManagement) -> sessionManagement
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -47,8 +51,8 @@ public class SecurityConfig {
             .requestMatchers("user").authenticated()
             .requestMatchers("/contact", "/notices", "/register").permitAll()
         )
-        .formLogin(withDefaults())
-        .httpBasic(withDefaults());
+        .oauth2ResourceServer((oauth2ResourceServer) -> oauth2ResourceServer
+            .jwt((jwt) -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter)));
     return http.build();
   }
 

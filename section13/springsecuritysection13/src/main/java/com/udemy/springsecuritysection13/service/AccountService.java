@@ -4,5 +4,5 @@ import com.udemy.springsecuritysection13.model.Accounts;
 
 public interface AccountService {
 
-  Accounts findByCustomerId(Integer id);
+  Accounts findByCustomerEmail(String email);
 }
